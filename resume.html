@@ -29,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -222,69 +219,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
 
 </head>
 
@@ -292,16 +226,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -346,27 +270,46 @@ div.tocify {
 </div>
 
 
-<p>Hiii! Here is Yaxuan! I am an international student from China. My
-graduate major is Financial Mathematics in XJTLU. And now I am a student
-in MS biostatistics in Columbia Universty. I sincerely enjoy the time
-here!</p>
-<p><img
-src="https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif" /></p>
-<p>This website is service for a homework coming from <a
-href="https://p8105.com/making_websites.html">p8105</a>, but this is a
-great chance to setup my own website to introduce myself and fullfill my
-Github. This would be really fun!</p>
-<p>You can learn more about me through the page <a
-href="resume.html">resume</a></p>
-<p>I also use <a href="https://www.google.com/">google</a> a ton for the
-data.</p>
-<p>In order to show my ability of using R, refer to <a
-href="plots.html">this page</a> with full details.</p>
-
-
-
+<div id="this-is-xuans-resume" class="section level1">
+<h1>This is Xuan’s resume</h1>
+<p>This website is coded by Xuan using to perform academic and
+professional experience.</p>
+<p>Go back to <a href="index.html">homepage</a></p>
+<p>I am Yaxuan Zheng, an international student from China.</p>
+<p>I was a dedicated and accomplished Financial Mathematics student at
+Xi’an Jiaotong Liverpool University, with an expected graduation in July
+2025. Throughout their academic journey, they have maintained an average
+score of 73/100 and a GPA of 3.63, earning the University Academic
+Achievement Award for the 2022/2023 academic year. Now I am student in
+Columbia Mailman School of MS biostatistics program, Public Health Data
+Science track. My academic interests lie at the intersection of
+biostatistics, data science, and public health research, where I aim to
+apply quantitative methods to understand complex health and
+environmental relationships.</p>
+<p>I have gained practical experience through internships at prestigious
+institutions such as the Yangtze River Delta Digital Finance Institute,
+where they analyzed digital RMB usage, and AIA Group Limited, where they
+established risk monitoring models.</p>
+<p>My research experience has focused on statistical modeling and
+data-driven health analysis. In my recent project at the University of
+Michigan, I explored how long-term exposure to PM2.5 and low-grade
+inflammation interact to affect brain health using data from over 31,000
+participants in the UK Biobank. I also investigated the effect of
+gastric lavage on survival outcomes following poisoning, applying
+Kaplan–Meier estimation and Cox proportional hazards models to clinical
+data. Currently, I am conducting an integrated survival analysis on Type
+2 Diabetes using national survey data to identify key behavioral and
+metabolic risk factors.</p>
+<p>Through these projects, I’ve developed strong skills in R
+programming, data visualization, and survival analysis, along with a
+deep appreciation for how statistical reasoning can inform real-world
+health decisions. Looking ahead, I hope to continue exploring how data
+science can be used to promote population health and evidence-based
+policy.</p>
 </div>
-</div>
+
+
+
 
 </div>
 
@@ -399,35 +342,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
