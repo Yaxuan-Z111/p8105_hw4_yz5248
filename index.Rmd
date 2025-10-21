@@ -1,0 +1,24 @@
+---
+title: "My awesome website for Homework4"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean
+---
+
+# This is Xuan's awesome website
+
+![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
+
+Hiii! Here is Yaxuan!
+I am an international student from China. My graduate major is Financial Mathematics.
+you can do anything you usually do.  
+that means that you can add text.
+This website is an example coming from [p8105](https://p8105.com/making_websites.html),
+we are making website today! Learn more about the page [here](about.html)
+
+i also use [google](https://www.google.com/) a ton for the data.
+
+to show some normal use, refer to [this page](plots.html) with plots
+

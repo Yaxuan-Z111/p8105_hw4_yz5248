@@ -1,0 +1,28 @@
+---
+title: "My awesome website"
+output: 
+  html_document:
+    theme: cerulean
+---
+
+
+Here is the tidyverse
+```{r, message=FALSE}
+library(tidyverse)
+```
+
+Here is the data frame
+```{r}
+plot_df = 
+  tibble(
+    x = rnorm(100, mean = 1, sd = 2),
+    y = 1 + 2*x + rnorm(100)
+  )
+```
+
+```{r}
+plot_df |>
+  ggplot(aes(x = x, y = y)) +
+  geom_point()
+```
+

@@ -1,0 +1,13 @@
+---
+title: "My awesome website"
+output: 
+  html_document:
+    theme: cerulean
+---
+
+# This is Jeff's awesome website
+
+![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
+this website is coded by Xuan using to perform all hard work.
+
+Go back to [homepage](index.html)
