@@ -1,28 +1,100 @@
 ---
-title: "My awesome website"
+title: "NY NOAA Weather Dashboard"
 output: 
-  html_document:
-    theme: cerulean
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
 ---
 
 
 Here is the tidyverse
 ```{r, message=FALSE}
+library(flexdashboard)
+library(plotly)
 library(tidyverse)
+library(p8105.datasets)
+
 ```
 
 Here is the data frame
 ```{r}
-plot_df = 
-  tibble(
-    x = rnorm(100, mean = 1, sd = 2),
-    y = 1 + 2*x + rnorm(100)
-  )
+data("ny_noaa")
 ```
 
 ```{r}
-plot_df |>
-  ggplot(aes(x = x, y = y)) +
-  geom_point()
+weather_df = ny_noaa |>
+  mutate(
+    tmax = as.numeric(tmax) / 10, 
+    tmin = as.numeric(tmin) / 10,
+    prcp = as.numeric(prcp) / 10, 
+    year = as.numeric(format(date, "%Y")),
+    month = as.numeric(format(date, "%m"))
+  ) |>
+  drop_na(tmax, tmin, prcp)
+
+weather_df
 ```
 
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A - Average Monthly Temperature (Line Plot)
+Column {data-width=350}
+```{r}
+avg_temp = weather_df |>
+  group_by(year, month) |>
+  summarise(mean_tmax = mean(tmax)) |>
+  filter(year >= 2010) |>
+  plot_ly(
+    x = ~month, y = ~mean_tmax, color = ~factor(year),
+    type = 'scatter', mode = 'lines + markers'
+  ) |>
+  layout(
+    title = "Average Monthly Max Temperature",
+    xaxis = list(title = "Month"),
+    yaxis = list(title = "Mean Max Temperature")
+  )
+avg_temp
+```
+
+-----------------------------------------------------------------------
+
+### Chart B - Temperature Distribution by Month (Box Plot)
+```{r}
+sample_temp = weather_df |>
+  filter(year == 2010) |>
+  group_by(month) |>
+  summarise(mean_tmax = mean(tmax, na.rm = TRUE)) |>
+  plot_ly(
+    x = ~factor(month), y = ~mean_tmax,
+    type = "bar", color = ~factor(month)
+  ) |>
+  layout(
+    title = "Average Max Temperature by Month",
+    xaxis = list(title = "Month"),
+    yaxis = list(title = "Mean Max Temperature")
+  )
+sample_temp
+```
+
+
+### Chart C - Total Precipitation by Year (Bar Plot)
+```{r}
+prcp_summary = weather_df |>
+group_by(year) |>
+summarise(total_prcp = sum(prcp, na.rm = TRUE))
+
+
+
+
+plot_ly(
+prcp_summary,
+x = ~year, y = ~total_prcp,
+type = "bar", color = ~total_prcp, colors = "Blues"
+) |>
+layout(
+title = "Total Annual Precipitation (mm)",
+xaxis = list(title = "Year"),
+yaxis = list(title = "Total Precipitation (mm)")
+)
+```
