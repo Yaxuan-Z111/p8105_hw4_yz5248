@@ -1,5 +1,6 @@
-name: "Yay internet!"
+name: "Xuan_internet!"
 output_dir: "."
+
 navbar:
   title: "Yaxuan Zheng"
   left:
@@ -10,10 +11,11 @@ navbar:
     - text: "Plots"
       href: plots.html
   right:
-    - text: "GitHub"
+    - icon: fa-github
       href: "https://github.com/Yaxuan-Z111"
-    - text: "Email"
+    - icon: fa-envelope
       href: "mailto:yaxuanz832@gmail.com"
+
 output:
   html_document:
     theme: cerulean
