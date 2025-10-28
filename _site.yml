@@ -2,7 +2,7 @@ name: "Xuan_internet!"
 output_dir: "."
 
 navbar:
-  title: "Yaxuan Zheng"
+  title: "xuan"
   left:
     - text: "Home"
       href: index.html
